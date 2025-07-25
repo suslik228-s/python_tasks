@@ -1,0 +1,29 @@
+{% extends "tasks/base.html" %}
+{% block title %}{{ task.title }}{% endblock %}
+{% block content %}
+
+<h2>{{ task.title }}</h2>
+<p><strong>Уровень:</strong> {{ task.get_level_display }}</p>
+<p>{{ task.description }}</p>
+
+<button class="btn btn-outline-info my-3" onclick="toggleAnswer()">Показать ответ</button>
+
+<div id="answer-block" style="display: none;">
+    <h4>Ответ:</h4>
+    <pre>{{ task.answer_code }}</pre>
+    {% if task.explanation %}
+        <h5>Пояснение:</h5>
+        <p>{{ task.explanation }}</p>
+    {% endif %}
+</div>
+
+<a class="btn btn-link mt-4" href="/">← Назад</a>
+
+<script>
+function toggleAnswer() {
+    const block = document.getElementById("answer-block");
+    block.style.display = block.style.display === "none" ? "block" : "none";
+}
+</script>
+
+{% endblock %}
